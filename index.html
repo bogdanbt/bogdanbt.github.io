@@ -19,7 +19,35 @@
 
         </div> 
 
-
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+    <div id="tradingview_40474"></div>
+    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BTCUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">BTCUSDT chart</span></a> by TradingView</div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "autosize": true,
+    "symbol": "BINANCE:BTCUSDT",
+    "interval": "D",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "hide_side_toolbar": false,
+    "allow_symbol_change": true,
+    "studies": [
+      "RSI@tv-basicstudies",
+      "Volume@tv-basicstudies"
+    ],
+    "container_id": "tradingview_40474"
+  }
+    );
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
         <div class="row">
             <div class="col-sm-12" id="chartContainer1" style="height: 400px;width: 500"></div>
         </div> 
@@ -35,66 +63,7 @@
 
 <script>
 
-setInterval(orderBook,500) ;
 
-function orderBook(){
-    var ourRequest = new XMLHttpRequest() ;
-    ourRequest.open('GET', 'https://api.binance.com/api/v1/depth?symbol='+document.getElementById("symbol").value+'&limit=10', true) ;
-    ourRequest.onload = function (){
-        ourData = JSON.parse (ourRequest.responseText);
-        console. log(ourData);
-        var xAsk= [] ,yAsk= [] , xBid= [], yBid=[] ;
-        //Collect Data for Asks
-        for (i=0;i<10;i++){
-            xAsk.push(parseFloat(ourData["asks"][i][1]));
-            //yAsk.push(ourData ["asks"][i][0]) ;
-            yAsk.push ((ourData ["asks"][i][0]*1).toString()+'_') ;
-
-        }
-        //Collect Data for Bids 
-        for (i=9;i>=0;i--){
-            xBid.push(parseFloat(ourData["bids"][i][1]));
-            //yBid.push(ourData["bids"][i][0]);
-            yBid.push ((ourData["bids"][i][0]*1).toString()+'_')
-
-        }
-        var data1=[{
-            type:'bar',
-            x:xAsk,
-            y:yAsk,
-            marker:{
-                color: 'rgb(160,9,9)'
-            },
-            orientation:'h'
-
-        
-        }];
-
-        var layout1={
-            title:"Asks"
-        }
-
-        Plotly.newPlot('chartContainer1',data1,layout1);
-        
-        var data2=[{
-            type:'bar',
-            x:xBid,
-            y:yBid,
-            marker:{
-                color: 'rgb(3,119,73)'
-                
-            },
-            orientation:'h'
-        
-        }];
-        var layout2={
-            title:"Bids"
-        }
-        Plotly.newPlot('chartContainer2',data2,layout2);
-
-    }
-    ourRequest. send();
-}
 </script> 
     
 </html>
