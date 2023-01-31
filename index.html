@@ -1,29 +1,201 @@
+<html>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<head>
+    <style>
+        .divleft{
+            width:50%;
+            float: left;
+        }
+        .divright{
+            width:50%;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        
+        
+        <div class="row">
+            <h1>Visualize Orderbook</h1> 
+        </div> 
+        
+
+        <div class="row">
+            <input id="symbol" type="text" class="col-sm-2" placeholder="Symbol" value="DASHUSDT">
+
+        </div> 
+
+
+        <div>
+<div class="divleft">
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div id="tradingview_ac770"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BTCUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">BTCUSDT chart</span></a> by TradingView</div>
-  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-  <script type="text/javascript">
-  new TradingView.widget(
-  {
-  "width": 980,
-  "height": 610,
-  "symbol": "BINANCE:BTCUSDT",
-  "interval": "5",
-  "timezone": "Etc/UTC",
-  "theme": "light",
-  "style": "1",
-  "locale": "en",
-  "toolbar_bg": "#f1f3f6",
-  "enable_publishing": false,
-  "allow_symbol_change": true,
-  "studies": [
-    "RSI@tv-basicstudies",
-    "Volume@tv-basicstudies"
-  ],
-  "container_id": "tradingview_ac770"
-}
-  );
-  </script>
+    <div id="tradingview_ac770"></div>
+    <!--<div class="tradingview-widget-copyright"><a href=link_TA rel="noopener" target="_blank"><span class="blue-text">BTCUSDT chart</span></a> by TradingView</div>-->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+    new TradingView.widget(
+    {
+    "autosize": true,
+    "symbol": "BINANCE:"+document.getElementById("symbol").value,
+    "interval": "5",
+    "timezone": "Etc/UTC",
+    "theme": "light",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#f1f3f6",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "studies": [
+      "RSI@tv-basicstudies",
+      "Volume@tv-basicstudies"
+    ],
+    "container_id": "tradingview_ac770"
+  }
+    );
+    </script>
+  </div>
+  <!-- TradingView Widget END -->
+          
+        
+        </div>
 </div>
-<!-- TradingView Widget END -->
+<div class="divright">
+    <div class="row">
+        <div class="col-sm-12" id="chartContainer1" style="height: 400px;width: 500"></div>
+    </div> 
+    
+
+    <div class="row">
+        <div class="col-sm-12" id="chartContainer2" style="height: 400px;width: 500"></div>
+    </div> 
+
+
+</div>
+        
+
+            </div>
+<!-- TradingView Widget BEGIN -->
+<!-- TradingView Widget BEGIN -->
+<div>
+    <div class="row">
+        <div class="col-sm-12" id="chartContainer3" style="height: 400px;width: 500"></div>
+    </div> 
+    
+
+    <div class="row">
+        <div class="col-sm-12" id="chartContainer4" style="height: 400px;width: 500"></div>
+    </div> 
+</div>
+</body> 
+
+<script>
+setInterval(orderBook,500) ;
+
+
+//$.get("https://binance.com/futures/data/takerlongshortRatio?symbol=ETHUSDT&period=5m&limit=100")
+setInterval(Taker,6000) ;
+
+function Taker(){
+    var ourRequest2 = new XMLHttpRequest() ;
+    ourRequest2.open('GET', 'https://binance.com/futures/data/takerlongshortRatio?symbol=ETHUSDT&period=5m&limit=100',true) ;
+    ourRequest2.send();
+}
+//  endpoint   /futures/data/takerlongshortRatio
+//const url='https://binance.com/futures/data/takerlongshortRatio?symbol=BTCUSDT&period=5m&limit=100'
+
+//
+    //ourRequest2.onload = function (){
+      //  ourData2 = JSON.parse (ourRequest2.responseText);
+        //console. log(ourData2);
+        //var time= [] ,sel= [] , buy= [], yBid=[] ;
+        //Collect Data for Asks
+        //for (i=0;i<100;i++){
+        //    time.push(parseFloat(ourData[i]["timestamp"]));
+        //    //yAsk.push(ourData ["asks"][i][0]) ;
+        //    sel.push (parseFloat(ourData [i]["sellVol"] ));
+        //    buy.push (parseFloat(ourData [i]["buyVol"] ));
+//
+        //}
+        ////Collect Data for Bids 
+//
+        //var data1=[{
+        //    type:'bar',
+        //    x:time,
+        //    y:sel,
+        //    marker:{
+        //        color: 'rgb(160,9,9)'
+        //    },
+//
+        //
+        //}];
+        //Plotly.newPlot('chartContainer3',data1);
+        //var data2=[{
+        //    type:'bar',
+        //    x:time,
+        //    y:buy,
+        //    marker:{
+        //        color: 'rgb(3,119,73)'  
+        //    },
+        //}];
+        //Plotly.newPlot('chartContainer4',data2);
+    //}
+    //ourRequest2.send();
+//}
+function orderBook(){
+    var ourRequest = new XMLHttpRequest() ;
+    ourRequest.open('GET', 'https://api.binance.com/api/v1/depth?symbol='+document.getElementById("symbol").value+'&limit=100', true) ;
+    ourRequest.onload = function (){
+        ourData = JSON.parse (ourRequest.responseText);
+        console. log(ourData);
+        var xAsk= [] ,yAsk= [] , xBid= [], yBid=[] ;
+        //Collect Data for Asks
+        for (i=0;i<100;i++){
+            xAsk.push(parseFloat(ourData["asks"][i][1]));
+            //yAsk.push(ourData ["asks"][i][0]) ;
+            yAsk.push ((ourData ["asks"][i][0]*1).toString()+'_') ;
+
+        }
+        //Collect Data for Bids 
+        for (i=99;i>=0;i--){
+            xBid.push(parseFloat(ourData["bids"][i][1]));
+            //yBid.push(ourData["bids"][i][0]);
+            yBid.push ((ourData["bids"][i][0]*1).toString()+'_')
+
+        }
+        var data1=[{
+            type:'bar',
+            x:xAsk,
+            y:yAsk,
+            marker:{
+                color: 'rgb(160,9,9)'
+            },
+            orientation:'h' 
+
+        
+        }];
+        Plotly.newPlot('chartContainer1',data1);
+        var data2=[{
+            type:'bar',
+            x:xBid,
+            y:yBid,
+            marker:{
+                color: 'rgb(3,119,73)'  
+            },
+            orientation:'h'
+        }];
+        Plotly.newPlot('chartContainer2',data2);
+    }
+    ourRequest. send();
+}
+
+</script> 
+    
+</html>
