@@ -1,24 +1,10 @@
+<!DOCTYPE html>
 <html>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="miniClustercopy.js"></script>
-<script src="oi.js"></script>
+
 
 <head>
-    <style>
-        .divleft{
-            width:50%;
-            float: left;
-        }
-        .divright{
-            width:50%;
-            float: right;
-        }
-    </style>
+
 </head>
 
 <body>
@@ -30,45 +16,22 @@
         </div> 
         
 
-        <div class="row">
-            <input id="symbol1"  type="text" class="col-sm-2" placeholder="Symbol" value="BAKEUSDT">
-            <input id="symbol1interval"  type="text" class="col-sm-2" placeholder="Symbol" value="5m">
-            <input id="symbol1limit"  type="text" class="col-sm-2" placeholder="Symbol" value="500">
 
-        </div> 
-        <div id="oi">
-
-        </div>
-        <div id="miniCluster1">
-
-        </div>
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-    <div id="tradingview_a3288"></div>
-    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BTCUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">BTCUSDT chart</span></a> by TradingView</div>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script type="text/javascript">
-    new TradingView.widget(
-    {
-    "width": 980,
-    "height": 610,
-    "symbol": "BINANCE:BAKEUSDT",
-    "interval": "5",
-    "timezone": "Europe/Riga",
-    "theme": "light",
-    "style": "1",
-    "locale": "en",
-    "toolbar_bg": "#f1f3f6",
-    "enable_publishing": false,
-    "hide_side_toolbar": false,
-    "allow_symbol_change": true,
-    "container_id": "tradingview_a3288"
-  }
-    );
-    </script>
-  </div>
-  <!-- TradingView Widget END -->        
-    <div>
+</div>
+<script>
+    fetch('https://www.binance.com/futures/data/openInterestHist?symbol=LINAUSDT&period=1h&limit=100',
+    
+      {method: 'GET',
+      mode: "cors",
+      headers: {
+        accept: 'application/json',
+      }
+    })
+    .then( response => response.json() )
+   .then( data => console.log(data) )
+</script>
+    
+</body>
 
     
 </html>
